@@ -30,4 +30,22 @@ module.exports = (app) => {
         });
 
     }); 
+
+    app.post('/register', async (req, res) => {
+        const { user, password,nombre, fecha_nacimiento, genero } = req.body;
+    
+       
+    
+        const query = 'INSERT INTO user (email, pass, nombre,fecha_nacimiento, genero) VALUES (?, ?, ?, ?, ?)';
+    
+        connection.query(query, [user, password,nombre, fecha_nacimiento, genero], (error, results) => {
+            if (error) {
+                console.error('Error inserting user:', error);
+                res.status(500).json({ error: 'Error inserting user' });
+                return;
+            }
+    
+            res.status(201).json({ message: 'User created', userId: results.insertId });
+        });
+    });
 }

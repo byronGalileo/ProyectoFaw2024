@@ -53,10 +53,11 @@ module.exports = (app) => {
   });
 
   app.get('/tasks/complete/:id', (req, res) => {
-    const taskId = req.params.id;
+    
+    
   
     const query = 'UPDATE task SET completo = 1 WHERE id = ?';
-  
+    
     connection.query(query, [taskId], (error, results) => {
       if (error) {
         console.error('Error updating task:', error);
